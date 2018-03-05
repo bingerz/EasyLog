@@ -19,8 +19,17 @@ public final class EasyLog {
     private static final int CALL_STACK_INDEX = 4;
     private static final Pattern ANONYMOUS_CLASS = Pattern.compile("(\\$\\d+)+$");
 
+    private static String explicitTag;
     private static boolean isLoggable = true;
     private static boolean isAppendTag = true;
+
+    public static void setExplicitTag(String tag) {
+        explicitTag = tag;
+    }
+
+    public static String getExplicitTag() {
+        return explicitTag;
+    }
 
     public static void setLoggable(boolean enable) {
         isLoggable = enable;
@@ -209,16 +218,21 @@ public final class EasyLog {
         if (m.find()) {
             tag = m.replaceAll("");
         }
-        tag = tag.substring(tag.lastIndexOf('.') + 1);
+        return tag.substring(tag.lastIndexOf('.') + 1);
+    }
+
+    private static String getTag() {
+        String tag;
+        if (explicitTag != null && explicitTag.length() > 0) {
+            tag = explicitTag;
+        } else {
+            tag = createStackElementTag(getStackTraceElement());
+        }
         // Tag length limit was removed in API 24.
         if (tag.length() <= MAX_TAG_LENGTH || Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             return tag;
         }
         return tag.substring(0, MAX_TAG_LENGTH);
-    }
-
-    private static String getTag() {
-        return createStackElementTag(getStackTraceElement());
     }
 
     private static String getAppendTag() {
