@@ -144,7 +144,10 @@ public final class EasyLog {
     }
 
     private static void prepareLog(int priority, Throwable t, String message, Object... args) {
-        // Consume tag even when message is not loggable so that next message is correctly tagged.
+        if (!isLoggable) {
+            return;
+        }
+
         String tag = getTag();
 
         if (message != null && message.length() == 0) {
