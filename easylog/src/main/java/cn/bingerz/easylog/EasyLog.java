@@ -21,7 +21,6 @@ public final class EasyLog {
 
     private static String explicitTag;
     private static boolean isLoggable = true;
-    private static boolean isAppendTag = true;
 
     public static void setExplicitTag(String tag) {
         explicitTag = tag;
@@ -37,14 +36,6 @@ public final class EasyLog {
 
     public static boolean isLoggable() {
         return isLoggable;
-    }
-
-    public static void setAppendTag(boolean isAppend) {
-        isAppendTag = isAppend;
-    }
-
-    public static boolean isAppendTag() {
-        return isAppendTag;
     }
 
     /** Log a verbose message with optional format args. */
@@ -176,11 +167,6 @@ public final class EasyLog {
             }
         }
 
-        if (isAppendTag()) {
-            String appendTag = getAppendTag();
-            message = appendTag + message;
-        }
-
         logPrint(priority, tag, message, t);
     }
 
@@ -235,11 +221,12 @@ public final class EasyLog {
         return tag.substring(0, MAX_TAG_LENGTH);
     }
 
+    @Deprecated
     private static String getAppendTag() {
         StackTraceElement element = getStackTraceElement();
         int lineNumber = element.getLineNumber();
         String methodName = element.getMethodName();
-        return String.format("<%s():%d> ", methodName, lineNumber);
+        return String.format("#%s:%d ", methodName, lineNumber);
     }
 
     private static void logPrint(int priority, String tag, String message, Throwable t) {

@@ -11,13 +11,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         EasyLog.setLoggable(true);  //Default is true;
-        EasyLog.setAppendTag(false);
 
         EasyLog.e("AppendTag disable. ExplicitTag is null.");
-
-        EasyLog.setAppendTag(true); //Add Log Details: <methodName():LineNumber>
-
-        EasyLog.e("AppendTag enable. ExplicitTag is null.");
 
         EasyLog.setExplicitTag("Main");
 
