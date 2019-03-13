@@ -1,6 +1,6 @@
 # EasyLog
 
-A library to simple package for Android Log, you can automatically get the TAG, method name, line number, custom Append Log details.
+A library to simple package for Android Log.
 ## Code Example
 
 ```java
@@ -9,6 +9,6 @@ A library to simple package for Android Log, you can automatically get the TAG, 
     
     EasyLog.d("hello world.");
     
-    EasyLog.setAppendTag(true); //Add Log Details: <methodName():LineNumber>
+    EasyLog.setExplicitTag("Main"); //Set Explicit Tag
     
 ```

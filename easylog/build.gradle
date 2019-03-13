@@ -36,7 +36,7 @@ dependencies {
 }
 
 //Gradle Maven/JCenter
-version = "1.0.1"
+version = "1.0.2"
 group = "cn.bingerz.android"
 def siteUrl = 'https://github.com/bingerz/EasyLog'
 def gitUrl = 'https://github.com/bingerz/EasyLog.git'
